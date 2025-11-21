@@ -1,0 +1,93 @@
+<div class="w-full h-full flex justify-center items-center">
+  <form [formGroup]="formRegister" (ngSubmit)="onSubmit()"
+  class="w-4/5 mx-auto bg-slate-300 p-6 rounded-lg flex flex-col gap-2 max-w-md"
+  >
+
+    <div class="flex flex-col gap-2">
+      <label class="text-cyan-700 font-black" for="name">Nome:</label>
+      <input type="text" id="name" class="bg-zinc-50 rounded h-8 text-lg p-2 font-mono text-cyan-900 border border-cyan-900 shadow " formControlName="name">
+      <div class="w-full flex flex-col h-8">
+          @if(formRegister.get('name')?.touched && formRegister.get('name')?.invalid) {
+            <span class="text-red-600 text-xs">O nome é obrigatório.</span>
+          }
+      </div>
+    </div>
+
+    <div class="flex flex-col gap-2">
+      <label class="text-cyan-700 font-black" for="email">Email:</label>
+      <input type="email" id="email" class="bg-zinc-50 rounded h-8 text-lg p-2 font-mono text-cyan-900 border border-cyan-900 shadow " formControlName="email">
+      <div class="w-full flex flex-col h-8">
+          @if(formRegister.get('email')?.touched && formRegister.get('email')?.invalid) {
+            @if(formRegister.get('email')?.errors?.['required']) {
+              <span class="text-red-600 text-xs">O email é obrigatório.</span>
+            }
+            @if(formRegister.get('email')?.errors?.['email']) {
+              <span class="text-red-600 text-xs">Formato de email inválido.</span>
+            }
+          }
+      </div>
+    </div>
+
+    <div class="flex flex-col gap-2">
+      <label class="text-cyan-700 font-black" for="password">Senha:</label>
+      <input type="text" id="password" class="bg-zinc-50 rounded h-8 text-lg p-2 font-mono text-cyan-900 border border-cyan-900 shadow" formControlName="password">
+      <div class="w-full flex flex-col h-8">
+          @if(formRegister.get('password')?.touched && formRegister.get('password')?.invalid) {
+            @if(formRegister.get('password')?.errors?.['required']) {
+              <span class="text-red-600 text-xs">A senha é obrigatória.</span>
+            }
+            @if(formRegister.get('password')?.errors?.['minlength']) {
+              <span class="text-red-600 text-xs">A senha deve ter ao menos 6 caracteres.</span>
+            }
+            
+          }
+      </div>
+    </div>
+
+    <div class="flex flex-col gap-2">
+      <label class="text-cyan-700 font-black" for="cpf">CPF:</label>
+      <input type="text" id="cpf" class="bg-zinc-50 rounded h-8 text-lg p-2 font-mono text-cyan-900 border border-cyan-900 shadow" formControlName="cpf">
+      <div class="w-full flex flex-col h-8">
+          @if(formRegister.get('cpf')?.touched && formRegister.get('cpf')?.invalid) {
+            @if(formRegister.get('cpf')?.errors?.['required']) {
+              <span class="text-red-600 text-xs">O CPF é obrigatório.</span>
+            }
+            @if(formRegister.get('cpf')?.errors?.['minlength']) {
+              <span class="text-red-600 text-xs">CPF deve ter 11 dígitos.</span>
+            }
+            @if(formRegister.get('cpf')?.errors?.['maxlength']) {
+              <span class="text-red-600 text-xs">CPF deve ter 11 dígitos.</span>
+            }
+            @if(formRegister.get('cpf')?.errors?.['pattern']) {
+              <span class="text-red-600 text-xs">Formato de CPF inválido.</span>
+            }
+          }
+      </div>
+    </div>
+
+    <div class="flex flex-col gap-2">
+      <label class="text-cyan-700 font-black" for="phone">Telefone:</label>
+      <input type="text" id="phone" class="bg-zinc-50 rounded h-8 text-lg p-2 font-mono text-cyan-900 border border-cyan-900 shadow" formControlName="phone">
+      <div class="w-full flex flex-col h-8">
+          @if(formRegister.get('phone')?.touched && formRegister.get('phone')?.invalid) {
+            @if(formRegister.get('phone')?.errors?.['required']) {
+              <span class="text-red-600 text-xs">O telefone é obrigatório.</span>
+            }
+            @if(formRegister.get('phone')?.errors?.['minlength']) {
+              <span class="text-red-600 text-xs">Telefone deve ter no mínimo 11 dígitos.</span>
+            }
+            @if(formRegister.get('phone')?.errors?.['pattern']) {
+              <span class="text-red-600 text-xs">Formato de telefone inválido.</span>
+            }
+            @if(formRegister.get('phone')?.errors?.["maxLength"]) {
+              <span class="text-red-600 text-xs">Telefone deve ter no mínimo 11 dígitos.</span>
+            }
+          }
+      </div>
+    </div>
+
+    <button type="submit" class="w-full bg-cyan-700 p-2 rounded text-cyan-50 font-bold cursor-pointer" [disabled]="formRegister.invalid">
+      Register
+    </button>
+  </form>
+</div>

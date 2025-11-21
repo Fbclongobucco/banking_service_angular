@@ -1,0 +1,189 @@
+<!-- Container Principal (Fundo Cinza Claro para Contraste) -->
+<div class="w-full h-full overflow-y-hidden bg-slate-50 flex flex-col md:flex-row font-sans text-slate-800">
+
+    <main class="flex-1 flex flex-col h-full">
+
+        <header class="bg-white border-b border-slate-200 p-6 flex justify-between items-center sticky top-0 z-10">
+            <div class="flex justify-between w-full sm:px-25">
+                <div >
+                    <h1 class="text-xl md:text-2xl font-bold text-cyan-950">
+                        Olá, {{customerDetails()?.name}} 👋
+                    </h1>
+                    <p class="text-sm text-slate-500 hidden md:block">Bem-vindo ao seu painel financeiro.</p>
+                </div>
+                <div class="flex items-center gap-3">
+                    <div class="text-right ">
+                        <p class="text-xs font-bold text-cyan-950">Conta: {{customerDetails()?.account?.accountNumber}}</p>
+                        <p class="text-xs text-slate-500">Agência: 0001</p>
+                    </div>
+                    <div class="w-10 h-10 rounded-full bg-cyan-100 items-center justify-center text-cyan-700 sm:flex hidden">
+                        <fa-icon [icon]="faUser"></fa-icon>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <div class="p-4 md:p-8 overflow-y-auto h-full bg-slate-500">
+
+            <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-12 gap-6">
+
+                <div class="md:col-span-8 flex flex-col gap-6">
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                        <div
+                            class="bg-white p-6 rounded-2xl shadow-sm border border-slate-100 hover:shadow-md transition-shadow">
+                            <div class="flex justify-between items-start mb-4">
+                                <span class="text-slate-500 font-medium text-sm">Saldo em conta</span>
+                                <fa-icon [icon]="faMoneyBillTransfer"
+                                    class="text-emerald-500 bg-emerald-50 p-2 rounded-full"></fa-icon>
+                            </div>
+                            <h2 class="text-3xl font-bold text-slate-900 tracking-tight">
+                                {{ customerDetails()?.account?.balance | currency:'BRL':'symbol':'1.2-2' }}
+                            </h2>
+                        </div>
+
+                        <div
+                            class="bg-white p-6 rounded-2xl shadow-sm border border-slate-100 hover:shadow-md transition-shadow">
+                            <div class="flex justify-between items-start mb-4">
+                                <span class="text-slate-500 font-medium text-sm">Limite de Crédito</span>
+                                <fa-icon [icon]="faCreditCard"
+                                    class="text-blue-500 bg-blue-50 p-2 rounded-full"></fa-icon>
+                            </div>
+                            <h2 class="text-3xl font-bold text-slate-900 tracking-tight">
+                                {{ customerDetails()?.account?.creditLimit | currency:'BRL':'symbol':'1.2-2' }}
+                            </h2>
+                        </div>
+                    </div>
+
+                    <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-100">
+                        <h3 class="text-lg font-bold text-cyan-950 mb-4 flex items-center gap-2">
+                            <fa-icon [icon]="faPix" class="text-emerald-500"></fa-icon> Área Pix & Serviços
+                        </h3>
+
+                        <div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
+                            <button
+                                class="cursor-pointer flex flex-col items-center justify-center gap-3 p-4 rounded-xl bg-slate-50 hover:bg-slate-100 transition-colors group border border-transparent hover:border-slate-200">
+                                <div
+                                    class="w-12 h-12 rounded-full bg-cyan-950 text-white flex items-center justify-center shadow-lg shadow-cyan-900/20 group-hover:scale-110 transition-transform">
+                                    <fa-icon [icon]="faMoneyBillTransfer"></fa-icon>
+                                </div>
+                                <span class="font-semibold text-sm text-slate-700">Transferir</span>
+                            </button>
+
+                            <button
+                                class="cursor-pointer flex flex-col items-center justify-center gap-3 p-4 rounded-xl bg-slate-50 hover:bg-slate-100 transition-colors group border border-transparent hover:border-slate-200">
+                                <div
+                                    class="w-12 h-12 rounded-full bg-cyan-950 text-white flex items-center justify-center shadow-lg shadow-cyan-900/20 group-hover:scale-110 transition-transform">
+                                    <fa-icon [icon]="faPix"></fa-icon>
+                                </div>
+                                <span class="font-semibold text-sm text-slate-700">Pagar</span>
+                            </button>
+
+                            <button
+                                class="cursor-pointer flex flex-col items-center justify-center gap-3 p-4 rounded-xl bg-slate-50 hover:bg-slate-100 transition-colors group border border-transparent hover:border-slate-200">
+                                <div
+                                    class="w-12 h-12 rounded-full bg-cyan-950 text-white flex items-center justify-center shadow-lg shadow-cyan-900/20 group-hover:scale-110 transition-transform">
+                                    <span class="text-xl">+</span>
+                                </div>
+                                <span class="font-semibold text-sm text-slate-700">Nova Chave</span>
+                            </button>
+                        </div>
+
+                        <div
+                            class="mt-6 p-3 bg-slate-50 rounded-lg border border-slate-200 flex justify-between items-center">
+                            <span class="text-sm font-medium text-slate-600">Sua chave Pix principal:</span>
+                            <span
+                                class="text-sm font-bold text-cyan-950 bg-white px-3 py-1 rounded border border-slate-200">
+                                {{customerDetails()?.account?.pixKey}}
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="md:col-span-4 flex flex-col gap-6">
+
+                    <div
+                        class="bg-linear-to-br from-cyan-950 to-cyan-800 p-6 rounded-2xl shadow-lg text-white relative overflow-hidden h-56 flex flex-col justify-between">
+                        <div
+                            class="absolute top-0 right-0 -mt-4 -mr-4 w-24 h-24 bg-white opacity-10 rounded-full blur-xl">
+                        </div>
+
+                        <div class="flex justify-between items-start z-10">
+                            <span class="font-bold text-lg tracking-wider">FBC Bank</span>
+                            <fa-icon [icon]="faMoneyBillTransfer" class="text-xl opacity-80"></fa-icon>
+                        </div>
+
+                        <div class="z-10">
+                            <div class="flex gap-2 mb-4">
+                                <div class="w-10 h-6 bg-yellow-400/80 rounded"></div>
+                                <fa-icon [icon]="faCreditCard" class="text-2xl"></fa-icon>
+                            </div>
+                            <p class="font-mono text-lg tracking-widest mb-1">
+                                {{customerDetails()?.account?.card?.cardNumber?.slice(0, 4)}} 
+                                {{customerDetails()?.account?.card?.cardNumber?.slice(4, 8)}}
+                                {{customerDetails()?.account?.card?.cardNumber?.slice(8, 12)}}
+                                {{customerDetails()?.account?.card?.cardNumber?.slice(12, 16)}}
+                            </p>
+                            <div class="flex justify-between items-end">
+                                <div>
+                                    <p class="text-[10px] text-cyan-200 uppercase">Titular</p>
+                                    <p class="text-sm font-medium uppercase truncate max-w-[150px]">
+                                        {{customerAuthenticated()?.name}}
+                                    </p>
+                                </div>
+
+                                <div>
+                                    <p class="text-[10px] text-cyan-200 uppercase">CVV</p>
+                                    <p class="text-sm font-medium uppercase truncate max-w-[150px]">
+                                        {{customerDetails()?.account?.card?.cvv}}
+                                    </p>
+                                </div>
+
+                                <div class="text-right">
+                                    <p class="text-[10px] text-cyan-200 uppercase">Validade</p>
+                                    <p class="text-sm font-medium">12/29</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-white p-6 rounded-2xl shadow-sm border flex flex-col border-slate-100 ">
+                        <h3 class="text-lg font-bold text-cyan-950 mb-4 border-b border-slate-100 pb-2">
+                            Meus Dados
+                        </h3>
+                        <ul class="space-y-4">
+                            <li class="flex flex-col">
+                                <span class="text-xs text-slate-400 uppercase font-semibold">Email</span>
+                                <span
+                                    class="text-sm font-mono text-slate-700 truncate">{{customerDetails()?.email}}</span>
+                            </li>
+                            <li class="flex flex-col">
+                                <span class="text-xs text-slate-400 uppercase font-semibold">CPF</span>
+                                <span class="text-sm font-medium text-slate-700">{{customerDetails()?.cpf}}</span>
+                            </li>
+                            <li class="flex flex-col">
+                                <span class="text-xs text-slate-400 uppercase font-semibold">Telefone</span>
+                                <span
+                                    class="text-sm font-medium text-slate-700">
+                                    ({{customerDetails()?.phone?.substring(0,2)}})
+                                    {{customerDetails()?.phone?.substring(2,
+                                    7)}}-{{customerDetails()?.phone?.substring(7, 11)}} </span>
+                            </li>
+                        </ul>
+                        <div class="flex gap-6 justify-center">
+                            <a href="/edit-profile"
+                                class=" mt-6 w-40 text-center text-cyan-950 text-sm font-bold py-2 border border-cyan-950 rounded-lg hover:bg-cyan-50 transition-colors">
+                                Editar Perfil
+                            </a>
+                            <a href="/edit-profile"
+                                class=" mt-6 w-40 text-center bg-zinc-800 text-zinc-50 text-sm font-bold py-2 border border-cyan-950 rounded-lg hover:bg-cyan-600 hover:text-cyan-50 transition-colors">
+                                Cancelar Conta
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </main>
+</div>

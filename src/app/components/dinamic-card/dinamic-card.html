@@ -1,0 +1,18 @@
+
+   @if(customer) {
+    <div  class="w-24 flex justify-center items-center ">
+         <button (click)="logout()" class="px-6 py-1 bg-cyan-600 rounded text-cyan-50 font-bold  text-center
+         hover:bg-zinc-400 hover:scale-105 duration-200 transition-all cursor-pointer">Sair
+        </button>
+    </div>
+
+}   @else {
+     <div [ngClass]="isRegisterLocator() ? 'hidden' : 'flex'" class="w-full flex-col justify-center items-center gap-4  sm:flex-row sm:mx-3">
+        <a class="p-1 sm:px-1  bg-zinc-200 rounded text-cyan-900 font-bold w-full h-full text-center
+         hover:bg-cyan-900 hover:text-cyan-50 hover:scale-105 duration-200 transition-all" href="/login">Acessar minha conta</a>
+        <a class="p-1 sm:px-2 sm:py-4 bg-cyan-600 rounded text-cyan-50
+         font-bold w-full h-full text-center
+         hover:bg-cyan-100 hover:text-cyan-800 hover:scale-105 duration-200 transition-all" href="/register">
+         Criar uma conta</a>
+    </div>
+}
