@@ -4,6 +4,7 @@ import { CustomerResponseDTO } from '../../models/customer/dtos/customer-respons
 import { Customer } from '../../models/customer/entities/customer';
 import { map, Observable } from 'rxjs';
 import { RegisterRequestDto } from '../../models/customer/dtos/register-request-dto';
+import { UpdateRequestDto } from '../../models/customer/dtos/update-request-dto';
 
 @Injectable({
   providedIn: 'root',
@@ -38,8 +39,12 @@ export class CustomerService {
       );
   }
 
-  register(customer: RegisterRequestDto ) {
+  register(customer: RegisterRequestDto) {
     return this.http.post<CustomerResponseDTO>('http://localhost:8080/customers', customer);
+  }
+
+  update(id: number, customer: UpdateRequestDto) {
+    return this.http.put<void>(`http://localhost:8080/customers/${id}`, customer);
   }
 
 }

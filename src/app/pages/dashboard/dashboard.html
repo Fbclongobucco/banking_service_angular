@@ -1,5 +1,4 @@
-<!-- Container Principal (Fundo Cinza Claro para Contraste) -->
-<div class="w-full h-full overflow-y-hidden bg-slate-50 flex flex-col md:flex-row font-sans text-slate-800">
+<div class="w-full h-full overflow-y-hidden bg-slate-50 flex flex-col md:flex-row font-sans text-slate-800 relative">
 
     <main class="flex-1 flex flex-col h-full">
 
@@ -62,6 +61,7 @@
 
                         <div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
                             <button
+                                (click)="openTransferAccount()"
                                 class="cursor-pointer flex flex-col items-center justify-center gap-3 p-4 rounded-xl bg-slate-50 hover:bg-slate-100 transition-colors group border border-transparent hover:border-slate-200">
                                 <div
                                     class="w-12 h-12 rounded-full bg-cyan-950 text-white flex items-center justify-center shadow-lg shadow-cyan-900/20 group-hover:scale-110 transition-transform">
@@ -71,6 +71,7 @@
                             </button>
 
                             <button
+                            (click)="openPixPayment()"
                                 class="cursor-pointer flex flex-col items-center justify-center gap-3 p-4 rounded-xl bg-slate-50 hover:bg-slate-100 transition-colors group border border-transparent hover:border-slate-200">
                                 <div
                                     class="w-12 h-12 rounded-full bg-cyan-950 text-white flex items-center justify-center shadow-lg shadow-cyan-900/20 group-hover:scale-110 transition-transform">
@@ -86,6 +87,16 @@
                                     <span class="text-xl">+</span>
                                 </div>
                                 <span class="font-semibold text-sm text-slate-700">Nova Chave</span>
+                            </button>
+
+                            <button
+                                class="cursor-pointer flex flex-col items-center justify-center gap-3 p-4 rounded-xl bg-slate-50 hover:bg-slate-100 transition-colors group border border-transparent hover:border-slate-200">
+                                <div
+                                    class="w-12 h-12 rounded-full bg-cyan-950 text-white flex items-center justify-center shadow-lg shadow-cyan-900/20 group-hover:scale-110 transition-transform">
+                                     <fa-icon [icon]="faCreditCard"
+                                    class="text-rose-500 p-2 rounded-full"></fa-icon>
+                                </div>
+                                <span class="font-semibold text-sm text-slate-700">Cancelar Cartão</span>
                             </button>
                         </div>
 
@@ -109,7 +120,9 @@
                         </div>
 
                         <div class="flex justify-between items-start z-10">
-                            <span class="font-bold text-lg tracking-wider">FBC Bank</span>
+                            <div class="bg-slate-100/80 rounded-lg ">
+                                <img src="assets/logo.png" class="w-14 " alt="logo" >
+                            </div>
                             <fa-icon [icon]="faMoneyBillTransfer" class="text-xl opacity-80"></fa-icon>
                         </div>
 
@@ -171,18 +184,25 @@
                             </li>
                         </ul>
                         <div class="flex gap-6 justify-center">
-                            <a href="/edit-profile"
-                                class=" mt-6 w-40 text-center text-cyan-950 text-sm font-bold py-2 border border-cyan-950 rounded-lg hover:bg-cyan-50 transition-colors">
+                            <a href="/update-profile"
+                                class=" mt-6 w-40 text-center text-cyan-950 text-sm font-bold py-2 border border-cyan-950 rounded-lg
+                                 hover:bg-zinc-200 hover:text-cyan-900  hover:scale-105 duration-300 transition-all">
                                 Editar Perfil
                             </a>
                             <a href="/edit-profile"
-                                class=" mt-6 w-40 text-center bg-zinc-800 text-zinc-50 text-sm font-bold py-2 border border-cyan-950 rounded-lg hover:bg-cyan-600 hover:text-cyan-50 transition-colors">
+                                class=" mt-6 w-40 text-center bg-zinc-800 text-zinc-50 text-sm font-bold py-2 border border-cyan-950
+                                 rounded-lg hover:bg-red-900 hover:text-cyan-50 hover:scale-105 duration-300 transition-all">
                                 Cancelar Conta
                             </a>
                         </div>
                     </div>
+                    <div [ngClass]="isTransferAccountOpen() ? 'block' : 'hidden'" class="absolute w-full h-full top-0 left-0 z-10">
+                        <app-transfer-account  (closeEvent)="openTransferAccount()"></app-transfer-account>
+                    </div>
+                    <div  [ngClass]="isPaymentOpen() ? 'block' : 'hidden'" class="absolute w-full h-full  z-10">
+                        <app-transfer-pix (event)="openPixPayment()"></app-transfer-pix>
+                    </div>
                 </div>
-
             </div>
         </div>
     </main>

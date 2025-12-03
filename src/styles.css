@@ -1,9 +1,20 @@
 @import "tailwindcss";
 
 
-/* styles.css ou styles.scss */
 html, body {
   margin: 0;
   padding: 0;
   min-height: 100vh; 
+}
+
+@layer utilities {
+  .no-spin::-webkit-outer-spin-button,
+  .no-spin::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+
+  .no-spin {
+    -moz-appearance: textfield;
+  }
 }

@@ -1,9 +1,9 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { AuthService } from '../../auth/service/login-service/auth.service';
-import { faEnvelope, faLock } from '@fortawesome/free-solid-svg-icons';
+import { faEnvelope, faLock, faClose } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 @Component({
@@ -16,9 +16,11 @@ export class Login {
   private authService = inject(AuthService);
   private router = inject(Router);
   private fb = inject(FormBuilder);
+  forgotPasswordOpen = signal(false);
 
   faEnvelope = faEnvelope;
   faLock = faLock;
+  faClose = faClose;
 
   private emailPattern = /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/;
 
@@ -62,5 +64,13 @@ export class Login {
         this.loginForm.get('password')?.reset();
       }
     });
+  }
+
+  forgotPassword() {
+   this.forgotPasswordOpen.set(true);
+  }
+
+  closeForgotPassword() {
+    this.forgotPasswordOpen.update((current) => !current);
   }
 }

@@ -1,4 +1,4 @@
-<div class="flex w-full h-full justify-center items-center">
+<div class="flex w-full h-full justify-center items-center relative">
   <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="w-full max-w-sm mx-auto bg-slate-300 p-6 rounded-lg">
 
     <div class="mb-4">
@@ -6,9 +6,8 @@
         E-mail <fa-icon [icon]="faEnvelope" class="text-slate-500"></fa-icon>
       </label>
       <div class="flex items-center gap-2">
-        <input id="email" type="email" formControlName="email" 
-          class="w-full px-3 py-1 border border-cyan-600 rounded  bg-zinc-100 text-lg text-cyan-900 font-mono"
-
+        <input type="email" formControlName="email" 
+          class="w-full px-3 py-1 border border-cyan-600 rounded  bg-zinc-100 text-lg text-cyan-900 font-mono placeholder:opacity-40"
           [class.border-red-500]="emailControl?.invalid && (emailControl?.touched || emailControl?.dirty)"
           placeholder="seu@exemplo.com" />
       </div>
@@ -29,10 +28,10 @@
         <fa-icon [icon]="faLock" class="text-slate-500"></fa-icon>
       </label>
       <div class="flex items-center gap-2">
-        <input id="password" type="password" formControlName="password"
-          class="w-full px-3 py-1 border border-cyan-600 rounded bg-zinc-100 text-lg text-cyan-900 font-mono"
+        <input  type="password" formControlName="password"
+          class="w-full px-3 py-1 border border-cyan-600 rounded bg-zinc-100 text-lg text-cyan-900 font-mono placeholder:opacity-40"
           [class.border-red-500]="passwordControl?.invalid && (passwordControl?.touched || passwordControl?.dirty)"
-          placeholder="******" />
+          placeholder="digite sua senha" />
       </div>
       <div class="h-5">
         @if (passwordControl?.invalid && (passwordControl?.touched || passwordControl?.dirty)) {
@@ -43,13 +42,24 @@
         }
       </div>
       <div class=" flex justify-items-center items-center ">
-      <a class="text-sm text-cyan-900 font-semibold" href="/forgot"> Esqueci minha senha</a>
+      <a class="text-sm text-cyan-900 font-semibold" (click)="forgotPassword()"> Esqueci minha senha</a>
     </div>
     </div>
 
     <button type="submit" [disabled]="loginForm.invalid"
-      class="w-full bg-cyan-950 text-cyan-100 font-bold py-2 rounded disabled:opacity-50 cursor-pointer mt-2 disabled:cursor-not-allowed">
+      class="w-full bg-cyan-950 text-cyan-50 font-bold py-2 hover:bg-cyan-900 hover:scale-105 duration-200 transition-all 
+      rounded disabled:opacity-50 cursor-pointer mt-2 uppercase disabled:cursor-not-allowed">
       Entrar
     </button>
+    <div [ngClass]="forgotPasswordOpen() ? 'flex' : 'hidden' " class="absolute top-0 left-0 w-full h-full bg-cyan-950/70   justify-center items-center">
+      <div class="flex justify-center flex-col items-center">
+        <p class="p-4 w-4/5 rounded-2xl bg-rose-700 max-w-2xl text-cyan-50 text-center text-2xl font-bold">
+          Como esse é um sistema fictício a bem de testes, não existe uma lógica de redefinição de senha!
+        </p>
+          <button class="absolute top-4 right-4" (click)="closeForgotPassword()">
+            <fa-icon  [icon]="faClose"  class="text-cyan-50 cursor-pointer border-2 border-cyan-50 rounded p-2"></fa-icon>
+          </button>
+      </div>
+    </div>
   </form>
 </div>

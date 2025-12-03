@@ -6,7 +6,14 @@ export type AccountResponseDTO = {
     balance: number;
     creditLimit: number;
     pixKey: string;
-    card: CardResponseDTO 
+    card: CardResponseDTO,
+    customer?: {
+        id: number;
+        name: string;
+        email: string;
+        cpf: string;
+        phone: string;
+    } 
 }
 
 

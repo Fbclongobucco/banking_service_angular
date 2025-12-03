@@ -34,8 +34,10 @@ export class DinamicCard implements OnInit {
   }
 
   logout() {
+    setTimeout(()=>{
     this.authService.logout();
     this.customer = null;
     this.router.navigate(['/']);
+    }, 800)
   }
 }

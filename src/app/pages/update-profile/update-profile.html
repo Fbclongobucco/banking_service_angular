@@ -1,0 +1,55 @@
+<div class="w-full h-full flex justify-center items-center relative">
+  <form [formGroup]="formRegister" (ngSubmit)="onSubmit()"
+  class="w-4/5 mx-auto bg-slate-300 p-6 rounded-lg flex flex-col gap-2 max-w-md"
+  > 
+    <div class="text-lg font-semibold text-cyan-950">
+        <h2 class="uppercase text-center">Atualizar Perfil</h2>
+    </div>
+
+    <div class="flex flex-col gap-2">
+      <label class="text-cyan-700 font-black" for="name">Nome:</label>
+      <input type="text" id="name" class="bg-zinc-50 rounded h-8 text-lg p-2 font-mono text-cyan-900 border border-cyan-900 shadow " formControlName="name">
+      <div class="w-full flex flex-col h-8">
+          @if(formRegister.get('name')?.touched && formRegister.get('name')?.invalid) {
+            <span class="text-red-600 text-xs">O nome é obrigatório.</span>
+          }
+      </div>
+    </div>
+
+
+    <div class="flex flex-col gap-2">
+        
+      <label class="text-cyan-700 font-black" for="phone">Telefone:</label>
+      <input type="text" id="phone" class="bg-zinc-50 rounded h-8 text-lg p-2 font-mono text-cyan-900 border border-cyan-900 shadow" formControlName="phone">
+      <div class="w-full flex flex-col h-8">
+          @if(formRegister.get('phone')?.touched && formRegister.get('phone')?.invalid) {
+            @if(formRegister.get('phone')?.errors?.['required']) {
+              <span class="text-red-600 text-xs">O telefone é obrigatório.</span>
+            }
+            @if(formRegister.get('phone')?.errors?.['minlength']) {
+              <span class="text-red-600 text-xs">Telefone deve ter no mínimo 11 dígitos.</span>
+            }
+            @if(formRegister.get('phone')?.errors?.['pattern']) {
+              <span class="text-red-600 text-xs">Formato de telefone inválido.</span>
+            }
+            @if(formRegister.get('phone')?.errors?.["maxLength"]) {
+              <span class="text-red-600 text-xs">Telefone deve ter no mínimo 11 dígitos.</span>
+            }
+          }
+      </div>
+    </div>
+
+    <button type="submit" class="w-full bg-cyan-700 p-2 rounded text-cyan-50 font-bold cursor-pointer" [disabled]="formRegister.invalid">
+      Atualizar
+    </button>
+    <a href="/dashboard" class="max-w-1/2 w-1/4 self-end text-center mt-6 bg-slate-500 p-1 rounded text-zinc-50 font-bold cursor-pointer">
+      Voltar
+    </a>
+    <div [ngClass]="isSubmitting() ? 'flex' : 'hidden'" class="w-full h-full  text-cyan-950 absolute bottom-0 right-0 bg-cyan-950/60 flex justify-center items-center">
+      <p class="text-cyan-800 bg-slate-200 p-4 rounded-lg text-center font-mono text-2xl italic">Perfil atualizado com sucesso!</p>
+      <button class="absolute top-4 right-4" (click)="closedCardUpdate()">
+        <fa-icon  [icon]="faCloded"  class="text-cyan-50 cursor-pointer border-2 border-cyan-50 rounded p-2 "></fa-icon>
+      </button>
+    </div>
+  </form>
+</div>

@@ -7,11 +7,13 @@ import { faUser, faMoneyBillTransfer, faCreditCard } from '@fortawesome/free-sol
 import { faPix } from '@fortawesome/free-brands-svg-icons';
 import { FaIconComponent } from "@fortawesome/angular-fontawesome";
 import { Router } from '@angular/router';
-import { CurrencyPipe } from '@angular/common';
+import { CurrencyPipe, NgClass } from '@angular/common';
+import { TransferAccount } from "../../components/transfer-account/transfer-account";
+import { TransferPix } from '../../components/transfer-pix/transfer-pix';
 
 @Component({
   selector: 'app-dashboard',
-  imports: [FaIconComponent, CurrencyPipe],
+  imports: [FaIconComponent, CurrencyPipe, TransferAccount, TransferPix, NgClass],
   templateUrl: './dashboard.html',
 })
 export class Dashboard implements OnInit, OnDestroy {
@@ -22,6 +24,8 @@ export class Dashboard implements OnInit, OnDestroy {
   authService = inject(AuthService);
   service = inject(CustomerService);
   router = inject(Router);
+  isTransferAccountOpen = signal(false)
+  isPaymentOpen = signal(false)
   faUser = faUser
   faMoneyBillTransfer = faMoneyBillTransfer
   faPix = faPix
@@ -46,5 +50,13 @@ export class Dashboard implements OnInit, OnDestroy {
     this.customerAuthenticated.set(null);
     this.customerDetails.set(null);
     this.authService.logout();
+  }
+
+  openTransferAccount() {
+    this.isTransferAccountOpen.update((value) => !value);
+  }
+
+  openPixPayment() {
+    this.isPaymentOpen.update((value) => !value);
   }
 }

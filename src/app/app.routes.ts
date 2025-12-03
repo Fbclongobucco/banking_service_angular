@@ -3,6 +3,7 @@ import { Login } from './pages/login/login';
 import { Home } from './pages/home/home';
 import { Dashboard } from './pages/dashboard/dashboard';
 import { Register } from './pages/register/register';
+import { UpdateProfile } from './pages/update-profile/update-profile';
 
 export const routes: Routes = [
     {
@@ -20,5 +21,9 @@ export const routes: Routes = [
     {
         path: "register",
         component: Register
+    },
+    {
+        path: "update-profile",
+        component: UpdateProfile
     }
    ];
