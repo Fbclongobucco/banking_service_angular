@@ -20,9 +20,8 @@ export class DinamicCard implements OnInit {
   router = inject(Router);
 
   ngOnInit() {
-    this.authService.customer$.subscribe((user) => {
-      this.customer = user;
-    });
+  
+    this.customer = this.authService.getCustomer();
 
     this.router.events
       .pipe(filter(event => event instanceof NavigationEnd))

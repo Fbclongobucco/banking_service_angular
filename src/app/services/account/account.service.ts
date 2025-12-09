@@ -24,5 +24,13 @@ export class AccountService {
   findPixKey(key: string) {
     return this.httpClient.get<AccountResponseDTO>(`http://localhost:8080/accounts/get-by-pix-key/${key}`);
   }
+
+  transferByPix(idOrigin: number, pixKeyDestination: string, value: number) {
+    return this.httpClient.post<void>(`http://localhost:8080/accounts/pix/${idOrigin}`, 
+      {
+        pixKeyDestination: pixKeyDestination,
+        amount: value.toFixed(2)
+      });
+  }
   
 }

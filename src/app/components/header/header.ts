@@ -15,9 +15,10 @@ export class Header implements OnInit {
   isLoggedIn = signal(false)
 
   ngOnInit(): void {
-    this.authService.customer$.subscribe((user) => {
-      this.isLoggedIn.set(!!user);
-    });
+    const customerLogged = this.authService.getCustomer();
+    if (customerLogged) {
+      this.isLoggedIn.set(true)
+    }
   }
 
 

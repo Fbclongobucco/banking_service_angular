@@ -1,8 +1,7 @@
 <div class="w-full h-full flex justify-center items-center">
   <form [formGroup]="formRegister" (ngSubmit)="onSubmit()"
-  class="w-4/5 mx-auto bg-slate-300 p-6 rounded-lg flex flex-col gap-2 max-w-md"
+  class="w-4/5 mx-auto bg-slate-300 p-6 rounded-lg flex flex-col max-w-md"
   >
-
     <div class="flex flex-col gap-2">
       <label class="text-cyan-700 font-black" for="name">Nome:</label>
       <input type="text" id="name" class="bg-zinc-50 rounded h-8 text-lg p-2 font-mono text-cyan-900 border border-cyan-900 shadow " formControlName="name">
@@ -13,7 +12,7 @@
       </div>
     </div>
 
-    <div class="flex flex-col gap-2">
+    <div class="flex flex-col gap-1">
       <label class="text-cyan-700 font-black" for="email">Email:</label>
       <input type="email" id="email" class="bg-zinc-50 rounded h-8 text-lg p-2 font-mono text-cyan-900 border border-cyan-900 shadow " formControlName="email">
       <div class="w-full flex flex-col h-8">

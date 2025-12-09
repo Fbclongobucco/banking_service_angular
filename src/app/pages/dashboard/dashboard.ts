@@ -33,11 +33,11 @@ export class Dashboard implements OnInit, OnDestroy {
 
 
   ngOnInit(): void {
-    this.authService.customer$.subscribe((loggedUser) => {
-      this.customerAuthenticated.set(loggedUser);
+    this.authService.customer$.subscribe((customerLogged) => {
+      this.customerAuthenticated.set(customerLogged);
 
-      if (loggedUser) {
-        this.service.getCustomer(loggedUser.id).subscribe((customer) => {
+      if (customerLogged) {
+        this.service.getCustomer(customerLogged.id).subscribe((customer) => {
           this.customerDetails.set(customer);
         });
       } else {

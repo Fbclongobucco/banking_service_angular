@@ -6,7 +6,7 @@
             <div class="flex justify-between w-full sm:px-25">
                 <div >
                     <h1 class="text-xl md:text-2xl font-bold text-cyan-950">
-                        Olá, {{customerDetails()?.name}} 👋
+                        Olá, {{ (customerDetails()?.name ?? '').split(' ')[0] }} 👋
                     </h1>
                     <p class="text-sm text-slate-500 hidden md:block">Bem-vindo ao seu painel financeiro.</p>
                 </div>
